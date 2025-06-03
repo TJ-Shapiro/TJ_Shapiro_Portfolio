@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, ArrowTopRightOnSquareIcon, CodeBracketIcon, PlayIcon } from '@heroicons/react/24/solid';
+import { ArrowLeftIcon, ArrowTopRightOnSquareIcon, CodeBracketIcon} from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import Link from 'next/link';
 
