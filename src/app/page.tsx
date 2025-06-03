@@ -44,7 +44,7 @@ export default function Home() {
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="text-center md:text-left">
           <h1 className="text-4xl md:text-6xl font-bold text-[var(--foreground)] mb-6">
-            Hi, I'm <span className="text-primary-gradient">TJ Shapiro</span>
+            Hey, I&apos;m <span className="text-primary-gradient">TJ Shapiro!</span>
           </h1>
           <h2 className="text-xl md:text-2xl text-[color:rgba(var(--foreground),0.7)] mb-8 max-w-2xl mx-auto md:mx-0">
             A passionate developer creating awesome interactive experiences with embedded systems.

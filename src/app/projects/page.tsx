@@ -15,7 +15,7 @@ const projects: Project[] = [
     title: 'STM32 Digital Guitar Effects Pedal',
     description: 'Project combining analog and digital signal processing techniques to create guitar effects in an embedded device.',
     tags: ['C', 'I2C/I2S', 'SPI', 'RTOS'],
-    link: '#',
+    link: '/projects/guitar',
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ export default function ProjectsPage() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <h1 className="text-4xl font-bold text-[var(--foreground)] mb-2">My Projects</h1>
         <p className="text-xl text-[color:rgba(var(--foreground),0.7)] mb-12">
-          Things I've built to solve real-world problems:
+          Things I&apos;ve built to solve real-world problems:
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
