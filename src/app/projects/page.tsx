@@ -19,17 +19,17 @@ const projects: Project[] = [
   },
   {
     id: 2,
-    title: 'Portfolio Website',
+    title: 'Reactive LED',
     description: 'A responsive portfolio built with Next.js and Tailwind CSS.',
     tags: ['Next.js', 'Tailwind CSS'],
-    link: '#',
+    link: '/projects/LED',
   },
   {
     id: 3,
     title: 'Apple Vision Pro Tumor Detection',
     description: 'Medical device that allows surgeons to identify tumors in augmented reality in realtime.',
     tags: ['C++', 'Swift', 'VR/AR'],
-    link: '#',
+    link: '/projects/vision',
   },
 ];
 
