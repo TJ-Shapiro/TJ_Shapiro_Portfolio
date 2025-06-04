@@ -15,7 +15,6 @@ body {
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-/* Custom utility classes */
 @layer utilities {
   .bg-primary-gradient {
     background-image: linear-gradient(to right, var(--primary), var(--secondary));

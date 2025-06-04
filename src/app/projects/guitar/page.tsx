@@ -19,7 +19,6 @@ interface ProjectDetail {
   liveDemoUrl?: string;
 }
 
-// Sample project data - you'll want to fetch this dynamically based on the route
 const project: ProjectDetail = {
   id: 1,
   title: 'STM32 Digital Guitar Effects Pedal',
@@ -115,17 +114,17 @@ export default function ProjectDetailPage() {
         <section className="space-y-8">
           <h2 className="text-2xl font-bold mb-6">Project Gallery</h2>
           <div className="space-y-12">
-            {project.media.map((item, index) => (
-              <div key={index} className="scroll-mt-20" id={`media-${index}`}>
-                {item.type === 'image' ? (
-                  <div className="rounded-xl overflow-hidden shadow-xl bg-[var(--muted)]">
-                    <Image
-                      src={item.url}
-                      alt={item.caption || `${project.title} image ${index + 1}`}
-                      width={1200}
-                      height={800}
-                      className="w-full h-auto object-cover"
-                    />
+          {project.media.map((item, index) => (
+            <div key={index} className="scroll-mt-20" id={`media-${index}`}>
+              {item.type === 'image' ? (
+                <div className={`rounded-xl overflow-hidden shadow-xl bg-[var(--muted)] ${index === 0 ? 'max-w-md mx-auto' : ''}`}>
+                  <Image
+                    src={item.url}
+                    alt={item.caption || `${project.title} image ${index + 1}`}
+                    width={1200}
+                    height={800}
+                    className="w-full h-auto object-cover"
+                  />
                     {item.caption && (
                       <p className="text-sm text-[color:rgba(var(--foreground),0.6)] mt-2 px-4 py-2">
                         {item.caption}

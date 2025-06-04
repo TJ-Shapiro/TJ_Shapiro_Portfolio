@@ -1,59 +1,52 @@
-import { ArrowLeftIcon, ArrowTopRightOnSquareIcon, CodeBracketIcon} from '@heroicons/react/24/solid';
+import { ArrowLeftIcon, ArrowTopRightOnSquareIcon, CodeBracketIcon, CpuChipIcon, ServerIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import Link from 'next/link';
+import PDFViewer from '@/app/components/PDFViewer';
 
-interface ProjectDetail {
-  id: number;
-  title: string;
-  description: string;
-  detailedDescription: string[];
-  tags: string[];
-  link: string;
-  media: {
-    type: 'image' | 'video';
-    url: string;
-    caption?: string;
-  }[];
-  features: string[];
-  githubUrl?: string;
-  liveDemoUrl?: string;
-}
-
-// Sample project data - you'll want to fetch this dynamically based on the route
-const project: ProjectDetail = {
-  id: 1,
-  title: 'STM32 Digital Guitar Effects Pedal',
-  description: 'Project combining analog and digital signal processing techniques to create guitar effects in an embedded device.',
+const project = {
+  id: 2,
+  title: 'Raspberry Pi DJ Lighting System',
+  description: 'Full-stack hardware/software solution for club-grade audio-reactive lighting synchronized with DJ software via Ableton Link',
   detailedDescription: [
-    'This project involved designing a digital guitar effects pedal using an STM32 microcontroller. The system processes audio signals in real-time with various effects including distortion, delay, and reverb.',
-    'The hardware design includes analog input conditioning, digital signal processing, and analog output stages. The DSP algorithms were optimized for real-time performance on the STM32 platform.',
-    'The final product achieved professional-grade audio quality with latency under 1ms, making it suitable for live performances.'
+    'This professional DJ lighting system combines Raspberry Pi hardware with advanced audio processing to create stunning visual synchronization for live performances. The system uses rpi_ws281x for microsecond-precision LED control and integrates with industry-standard DJ software via Ableton Link.',
+    'The architecture features a custom UDP server with JSON protocol for low-latency communication between the audio analysis engine (running on a performance PC) and the Raspberry Pi LED controllers. This enables real-time visualization while keeping audio processing separate from lighting control.',
+    'Deployed in multiple club installations, this system provides reliable, high-performance lighting that stays perfectly synchronized with the music while reacting dynamically to audio input. The hardware design includes custom power regulation and signal boosting for large LED installations.'
   ],
-  tags: ['C', 'I2C/I2S', 'SPI', 'RTOS', 'DSP', 'STM32'],
-  link: 'guitar',
+  tags: [
+    'Raspberry Pi', 
+    'Python', 
+    'Ableton Link', 
+    'rpi_ws281x', 
+    'I2C/PWM', 
+    'UDP Server',
+    'Audio DSP'
+  ],
   media: [
-    { type: 'image', url: '/projects/pedal1.jpg', caption: 'Front panel design' },
-    { type: 'image', url: '/projects/pedal2.jpg', caption: 'Internal PCB layout' },
-    { type: 'video', url: 'https://youtube.com/embed/demo', caption: 'Demo in action' }
+    { type: 'image', url: '/projects/led1.jpg', caption: 'Club installation with 300-LED array', layout: 'full' },
+    { type: 'image', url: '/projects/led2.jpg', caption: 'Raspberry Pi control unit with I2C interface', layout: 'half' },
+    { type: 'image', url: '/projects/led3.jpg', caption: 'Custom power distribution board', layout: 'half' },
+    { type: 'video', url: 'https://youtube.com/embed/DbGv20EPAq0', caption: 'Simple LED Bedroom DJ Set Demo', layout: 'full' }
   ],
   features: [
-    'Real-time audio processing with <1ms latency',
-    'Multiple effect algorithms implemented in C',
-    'Custom PCB design with proper grounding techniques',
-    'I2S audio interface with 24-bit resolution',
-    'USB configuration interface'
+    'Hardware-level LED control via rpi_ws281x library',
+    'Microsecond-precision timing using Raspberry Pi PWM',
+    'UDP server architecture with JSON protocol',
+    'Ableton Link integration for DJ software sync',
+    'Multi-zone control via I2C expanders',
+    'Kick/snare detection with 10ms latency',
+    'Automatic gain control for different venues'
   ],
-  githubUrl: 'https://github.com/yourusername/guitar-pedal',
-  liveDemoUrl: 'https://yourwebsite.com/demo'
+  githubUrl: 'https://github.com/yourusername/dj-light-system',
+  demoVideoUrl: 'https://youtube.com/watch?v=dj-light-demo'
 };
 
-export default function ProjectDetailPage() {
+export default function DJLightControllerPage() {
   return (
-    <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
+    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
       {/* Back navigation */}
-      <div className="sticky top-0 z-10 bg-[var(--background)]/80 backdrop-blur-md border-b border-[var(--border)]">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link href="/projects" className="inline-flex items-center text-[var(--primary)] hover:underline group">
+      <div className="sticky top-0 z-10 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <Link href="/projects" className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline group">
             <ArrowLeftIcon className="h-5 w-5 mr-2 transition-transform group-hover:-translate-x-1" />
             Back to Projects
           </Link>
@@ -61,10 +54,13 @@ export default function ProjectDetailPage() {
       </div>
 
       {/* Project header */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{project.title}</h1>
-          <p className="text-xl text-[color:rgba(var(--foreground),0.7)] max-w-3xl">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 flex items-center">
+            <CpuChipIcon className="h-10 w-10 mr-4 text-purple-500" />
+            {project.title}
+          </h1>
+          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl">
             {project.description}
           </p>
         </div>
@@ -75,7 +71,7 @@ export default function ProjectDetailPage() {
             {project.tags.map((tag) => (
               <span 
                 key={tag}
-                className="px-3 py-1 bg-[color:rgba(var(--background),0.5)] text-[var(--foreground)] text-sm rounded-full"
+                className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm rounded-full"
               >
                 {tag}
               </span>
@@ -88,74 +84,93 @@ export default function ProjectDetailPage() {
                 href={project.githubUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center text-[var(--primary)] hover:underline group"
+                className="flex items-center text-blue-600 dark:text-blue-400 hover:underline group"
               >
                 <CodeBracketIcon className="h-5 w-5 mr-2 transition-transform group-hover:scale-110" />
                 Source Code
               </a>
             )}
-            {project.liveDemoUrl && (
+            {project.demoVideoUrl && (
               <a 
-                href={project.liveDemoUrl} 
+                href={project.demoVideoUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center text-[var(--primary)] hover:underline group"
+                className="flex items-center text-blue-600 dark:text-blue-400 hover:underline group"
               >
                 <ArrowTopRightOnSquareIcon className="h-5 w-5 mr-2 transition-transform group-hover:scale-110" />
-                Live Demo
+                Performance Demo
               </a>
             )}
           </div>
         </div>
       </section>
 
-      {/* Main content with smooth scrolling sections */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-20">
+      {/* Main content */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-20">
         {/* Media gallery */}
         <section className="space-y-8">
-          <h2 className="text-2xl font-bold mb-6">Project Gallery</h2>
+          <h2 className="text-2xl font-bold mb-6">System Gallery</h2>
           <div className="space-y-12">
-            {project.media.map((item, index) => (
-              <div key={index} className="scroll-mt-20" id={`media-${index}`}>
-                {item.type === 'image' ? (
-                  <div className="rounded-xl overflow-hidden shadow-xl bg-[var(--muted)]">
-                    <Image
-                      src={item.url}
-                      alt={item.caption || `${project.title} image ${index + 1}`}
-                      width={1200}
-                      height={800}
-                      className="w-full h-auto object-cover"
-                    />
-                    {item.caption && (
-                      <p className="text-sm text-[color:rgba(var(--foreground),0.6)] mt-2 px-4 py-2">
-                        {item.caption}
-                      </p>
-                    )}
-                  </div>
-                ) : (
-                  <div className="aspect-w-16 aspect-h-9 bg-black rounded-xl overflow-hidden shadow-xl">
-                    <iframe 
-                      src={item.url} 
-                      className="w-full h-full"
-                      frameBorder="0" 
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowFullScreen
-                      title={item.caption || `${project.title} video`}
-                    ></iframe>
-                  </div>
+            <div className="scroll-mt-20">
+              <div className="rounded-xl overflow-hidden shadow-xl bg-gray-100 dark:bg-gray-800">
+                <Image
+                  src={project.media[0].url}
+                  alt={project.media[0].caption}
+                  width={1600}
+                  height={900}
+                  className="w-full h-auto object-cover"
+                  priority
+                />
+                {project.media[0].caption && (
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 px-4 py-2">
+                    {project.media[0].caption}
+                  </p>
                 )}
               </div>
-            ))}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 scroll-mt-20">
+              {project.media.slice(1, 3).map((item, index) => (
+                <div key={index} className="rounded-xl overflow-hidden shadow-xl bg-gray-100 dark:bg-gray-800">
+                  <Image
+                    src={item.url}
+                    alt={item.caption}
+                    width={800}
+                    height={600}
+                    className="w-full h-auto object-cover"
+                  />
+                  {item.caption && (
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 px-4 py-2">
+                      {item.caption}
+                    </p>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {project.media[3] && (
+              <div className="scroll-mt-20 w-full">
+                <div className="relative pb-[56.25%] h-0 rounded-xl overflow-hidden shadow-xl"> 
+                  <iframe 
+                    src={project.media[3].url}
+                    className="absolute top-0 left-0 w-full h-full"
+                    frameBorder="0"
+                    allowFullScreen
+                    title={project.media[3].caption}
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </section>
 
         {/* Project details */}
         <section className="scroll-mt-20" id="details">
-          <h2 className="text-2xl font-bold mb-6">Project Details</h2>
+          <h2 className="text-2xl font-bold mb-6">System Details</h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-6">
               {project.detailedDescription.map((paragraph, index) => (
-                <p key={index} className="text-[color:rgba(var(--foreground),0.8)] leading-relaxed">
+                <p key={index} className="text-gray-700 dark:text-gray-300 leading-relaxed">
                   {paragraph}
                 </p>
               ))}
@@ -163,15 +178,18 @@ export default function ProjectDetailPage() {
             
             {/* Features list */}
             <div className="lg:col-span-1">
-              <div className="bg-[var(--muted)] rounded-xl p-6 shadow-sm sticky top-24">
-                <h3 className="text-lg font-semibold mb-4">Key Features</h3>
+              <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-6 shadow-sm sticky top-24">
+                <h3 className="text-lg font-semibold mb-4 flex items-center">
+                  <ServerIcon className="h-5 w-5 mr-2 text-purple-500" />
+                  Technical Highlights
+                </h3>
                 <ul className="space-y-3">
                   {project.features.map((feature, index) => (
                     <li key={index} className="flex items-start">
                       <div className="flex-shrink-0 mt-1.5">
-                        <div className="h-2 w-2 bg-[var(--primary)] rounded-full"></div>
+                        <div className="h-2 w-2 bg-purple-500 rounded-full"></div>
                       </div>
-                      <span className="ml-3 text-[color:rgba(var(--foreground),0.8)]">{feature}</span>
+                      <span className="ml-3 text-gray-700 dark:text-gray-300">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -182,54 +200,60 @@ export default function ProjectDetailPage() {
 
         {/* Technical implementation */}
         <section className="scroll-mt-20" id="technical">
-          <h2 className="text-2xl font-bold mb-6">Technical Implementation</h2>
-          <div className="bg-[var(--muted)] rounded-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">Architecture Diagram</h3>
-            <div className="aspect-w-16 aspect-h-9 bg-[var(--background)] rounded-lg overflow-hidden flex items-center justify-center">
-              <Image
-                src="/projects/architecture-diagram.jpg"
-                alt="System architecture diagram"
-                width={800}
-                height={450}
-                className="object-contain p-4"
-              />
-            </div>
+          <h2 className="text-2xl font-bold mb-6">Hardware/Software Integration</h2>
+          <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-6">
+            <h3 className="text-lg font-semibold mb-4">System Architecture</h3>
+            
+            <PDFViewer 
+              filePath="/projects/dj-light-architecture.pdf"
+              height="800px"
+              width="100%"
+            />
+            
             <div className="mt-6 space-y-4">
-              <h4 className="font-medium">Challenges & Solutions</h4>
+              <h4 className="font-medium">Key Technical Challenges</h4>
               <ul className="space-y-3">
                 <li className="flex items-start">
-                  <span className="text-[var(--primary)] mr-2">•</span>
-                  <span><strong>Latency issues:</strong> Optimized DSP algorithms and used DMA for audio transfer</span>
+                  <span className="text-purple-500 mr-2">•</span>
+                  <span><strong>Precision Timing:</strong> Developed custom PWM timing algorithms using rpi_ws281x to achieve &lt;1μs LED control precision</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-[var(--primary)] mr-2">•</span>
-                  <span><strong>Noise reduction:</strong> Implemented proper PCB grounding and shielding techniques</span>
+                  <span className="text-purple-500 mr-2">•</span>
+                  <span><strong>Network Reliability:</strong> Implemented UDP packet sequencing and redundancy for robust wireless communication in club environments</span>
                 </li>
                 <li className="flex items-start">
-                  <span className="text-[var(--primary)] mr-2">•</span>
-                  <span><strong>Real-time control:</strong> Developed a custom RTOS task scheduler for effect switching</span>
+                  <span className="text-purple-500 mr-2">•</span>
+                  <span><strong>Power Management:</strong> Designed custom power distribution boards with per-zone fusing for large LED installations</span>
                 </li>
               </ul>
             </div>
           </div>
         </section>
+        <section className="bg-gray-100 dark:bg-gray-800 py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-2xl font-bold mb-4">Want to know more?</h2>
+            <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
+              Get the full build guide or ask how these skills can be applied to your team!
+            </p>
+            <div className="flex gap-4 justify-center">
+              <a 
+                href={project.githubUrl}
+                className="inline-flex items-center px-6 py-3 bg-gray-800 text-white rounded-lg font-medium hover:bg-gray-700 transition-colors"
+              >
+                <CodeBracketIcon className="h-5 w-5 mr-2" />
+                View Build Guide
+              </a>
+              <Link 
+                href="/contact" 
+                className="inline-flex items-center px-6 py-3 bg-purple-600 text-white rounded-lg font-medium hover:bg-purple-700 transition-colors"
+              >
+                <CpuChipIcon className="h-5 w-5 mr-2" />
+                Contact me!
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
-
-      {/* Call to action */}
-      <section className="bg-[var(--muted)] py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">Want to know more?</h2>
-          <p className="text-[color:rgba(var(--foreground),0.7)] mb-6 max-w-2xl mx-auto">
-            Interested in the technical details or have a similar project in mind?
-          </p>
-          <Link 
-            href="/contact" 
-            className="inline-flex items-center px-6 py-3 bg-[var(--primary)] text-white rounded-lg font-medium hover:opacity-90 transition-opacity"
-          >
-            Get in Touch
-          </Link>
-        </div>
-      </section>
     </div>
   );
 }
