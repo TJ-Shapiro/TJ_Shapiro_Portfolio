@@ -11,26 +11,27 @@ interface Project {
 
 const projects: Project[] = [
   {
-    id: 1,
+    id: 2,
+    title: 'Apple Vision Pro Tumor Detection',
+    description: 'Medical device that allows surgeons to identify tumors in augmented reality in realtime.',
+    tags: ['C++', 'Swift', 'VR/AR'],
+    link: '/projects/vision',
+  },
+  {
+    id: 3,
     title: 'STM32 Digital Guitar Effects Pedal',
     description: 'Project combining analog and digital signal processing techniques to create guitar effects in an embedded device.',
     tags: ['C', 'I2C/I2S', 'SPI', 'RTOS'],
     link: '/projects/guitar',
   },
   {
-    id: 2,
+    id: 1,
     title: 'Reactive LED',
-    description: 'A responsive portfolio built with Next.js and Tailwind CSS.',
-    tags: ['Next.js', 'Tailwind CSS'],
+    description: 'Project combining audio processing and LED control to create a professional DJ lighting system.',
+    tags: ['RaspberryPi', 'Python', 'I2C/PWM', 'UDP', 'Audio DSP'],
     link: '/projects/LED',
   },
-  {
-    id: 3,
-    title: 'Apple Vision Pro Tumor Detection',
-    description: 'Medical device that allows surgeons to identify tumors in augmented reality in realtime.',
-    tags: ['C++', 'Swift', 'VR/AR'],
-    link: '/projects/vision',
-  },
+  
 ];
 
 export default function ProjectsPage() {

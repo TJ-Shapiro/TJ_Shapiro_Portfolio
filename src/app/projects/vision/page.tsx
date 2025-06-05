@@ -90,6 +90,38 @@ export default function VisionProProjectPage() {
 
       {/* Main content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-20">
+
+        {/* Project details */}
+        <section className="scroll-mt-20" id="details">
+          <h2 className="text-2xl font-bold mb-6">Project Details</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 space-y-6">
+              {project.detailedDescription.map((paragraph, index) => (
+                <p key={index} className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+            
+            {/* Features list */}
+            <div className="lg:col-span-1">
+              <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-6 shadow-sm sticky top-24">
+                <h3 className="text-lg font-semibold mb-4">Key Features</h3>
+                <ul className="space-y-3">
+                  {project.features.map((feature, index) => (
+                    <li key={index} className="flex items-start">
+                      <div className="flex-shrink-0 mt-1.5">
+                        <div className="h-2 w-2 bg-blue-500 rounded-full"></div>
+                      </div>
+                      <span className="ml-3 text-gray-700 dark:text-gray-300">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Media gallery */}
         <section className="space-y-8">
           <h2 className="text-2xl font-bold mb-6">Project Gallery</h2>
@@ -147,36 +179,7 @@ export default function VisionProProjectPage() {
           </div>
         </section>
 
-        {/* Project details */}
-        <section className="scroll-mt-20" id="details">
-          <h2 className="text-2xl font-bold mb-6">Project Details</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 space-y-6">
-              {project.detailedDescription.map((paragraph, index) => (
-                <p key={index} className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-            
-            {/* Features list */}
-            <div className="lg:col-span-1">
-              <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-6 shadow-sm sticky top-24">
-                <h3 className="text-lg font-semibold mb-4">Key Features</h3>
-                <ul className="space-y-3">
-                  {project.features.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <div className="flex-shrink-0 mt-1.5">
-                        <div className="h-2 w-2 bg-blue-500 rounded-full"></div>
-                      </div>
-                      <span className="ml-3 text-gray-700 dark:text-gray-300">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
+        
 
         {/* Technical implementation */}
         <section className="scroll-mt-20" id="technical">

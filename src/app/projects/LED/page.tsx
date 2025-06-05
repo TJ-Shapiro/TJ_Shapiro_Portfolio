@@ -1,7 +1,6 @@
 import { ArrowLeftIcon, ArrowTopRightOnSquareIcon, CodeBracketIcon, CpuChipIcon, ServerIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import Link from 'next/link';
-import PDFViewer from '@/app/components/PDFViewer';
 
 const project = {
   id: 2,
@@ -36,7 +35,7 @@ const project = {
     'Kick/snare detection with 10ms latency',
     'Automatic gain control for different venues'
   ],
-  githubUrl: 'https://github.com/yourusername/dj-light-system',
+  githubUrl: 'https://github.com/TJ-Shapiro/DJReactiveLED',
   demoVideoUrl: 'https://youtube.com/watch?v=dj-light-demo'
 };
 
@@ -107,6 +106,41 @@ export default function DJLightControllerPage() {
 
       {/* Main content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-20">
+
+        {/* Project details */}
+        <section className="scroll-mt-20" id="details">
+          <h2 className="text-2xl font-bold mb-6">System Details</h2>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 space-y-6">
+              {project.detailedDescription.map((paragraph, index) => (
+                <p key={index} className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+            
+            {/* Features list */}
+            <div className="lg:col-span-1">
+              <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-6 shadow-sm sticky top-24">
+                <h3 className="text-lg font-semibold mb-4 flex items-center">
+                  <ServerIcon className="h-5 w-5 mr-2 text-purple-500" />
+                  Technical Highlights
+                </h3>
+                <ul className="space-y-3">
+                  {project.features.map((feature, index) => (
+                    <li key={index} className="flex items-start">
+                      <div className="flex-shrink-0 mt-1.5">
+                        <div className="h-2 w-2 bg-purple-500 rounded-full"></div>
+                      </div>
+                      <span className="ml-3 text-gray-700 dark:text-gray-300">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Media gallery */}
         <section className="space-y-8">
           <h2 className="text-2xl font-bold mb-6">System Gallery</h2>
@@ -164,71 +198,6 @@ export default function DJLightControllerPage() {
           </div>
         </section>
 
-        {/* Project details */}
-        <section className="scroll-mt-20" id="details">
-          <h2 className="text-2xl font-bold mb-6">System Details</h2>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 space-y-6">
-              {project.detailedDescription.map((paragraph, index) => (
-                <p key={index} className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-            
-            {/* Features list */}
-            <div className="lg:col-span-1">
-              <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-6 shadow-sm sticky top-24">
-                <h3 className="text-lg font-semibold mb-4 flex items-center">
-                  <ServerIcon className="h-5 w-5 mr-2 text-purple-500" />
-                  Technical Highlights
-                </h3>
-                <ul className="space-y-3">
-                  {project.features.map((feature, index) => (
-                    <li key={index} className="flex items-start">
-                      <div className="flex-shrink-0 mt-1.5">
-                        <div className="h-2 w-2 bg-purple-500 rounded-full"></div>
-                      </div>
-                      <span className="ml-3 text-gray-700 dark:text-gray-300">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Technical implementation */}
-        <section className="scroll-mt-20" id="technical">
-          <h2 className="text-2xl font-bold mb-6">Hardware/Software Integration</h2>
-          <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">System Architecture</h3>
-            
-            <PDFViewer 
-              filePath="/projects/dj-light-architecture.pdf"
-              height="800px"
-              width="100%"
-            />
-            
-            <div className="mt-6 space-y-4">
-              <h4 className="font-medium">Key Technical Challenges</h4>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <span className="text-purple-500 mr-2">•</span>
-                  <span><strong>Precision Timing:</strong> Developed custom PWM timing algorithms using rpi_ws281x to achieve &lt;1μs LED control precision</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-purple-500 mr-2">•</span>
-                  <span><strong>Network Reliability:</strong> Implemented UDP packet sequencing and redundancy for robust wireless communication in club environments</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-purple-500 mr-2">•</span>
-                  <span><strong>Power Management:</strong> Designed custom power distribution boards with per-zone fusing for large LED installations</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section>
         <section className="bg-gray-100 dark:bg-gray-800 py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-2xl font-bold mb-4">Want to know more?</h2>

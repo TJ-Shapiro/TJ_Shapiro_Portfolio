@@ -13,6 +13,7 @@ interface ProjectDetail {
     type: 'image' | 'video';
     url: string;
     caption?: string;
+    layout?: 'full' | 'half';
   }[];
   features: string[];
   githubUrl?: string;
@@ -31,9 +32,10 @@ const project: ProjectDetail = {
   tags: ['C', 'I2C/I2S', 'SPI', 'RTOS', 'DSP', 'STM32'],
   link: 'guitar',
   media: [
-    { type: 'image', url: '/projects/pedal1.jpg', caption: 'Front panel design' },
-    { type: 'image', url: '/projects/pedal2.jpg', caption: 'Internal PCB layout' },
-    { type: 'video', url: 'https://youtube.com/embed/demo', caption: 'Demo in action' }
+    { type: 'image', url: '/projects/pedal1.jpg', caption: 'Front panel design', layout: 'half' },
+    { type: 'image', url: '/projects/pedal3.jpg', caption: 'Internal components', layout: 'half' },
+    { type: 'image', url: '/projects/pedal2.jpg', caption: 'Hardware Design', layout: 'full' },
+    { type: 'image', url: '/projects/pedal4.jpg', caption: 'Overview Block Diagram', layout: 'full' }
   ],
   features: [
     'Real-time audio processing with <1ms latency',
@@ -42,7 +44,7 @@ const project: ProjectDetail = {
     'I2S audio interface with 24-bit resolution',
     'USB configuration interface'
   ],
-  githubUrl: 'https://github.com/yourusername/guitar-pedal',
+  githubUrl: 'https://github.com/TJ-Shapiro/STM32-DSP-Guitar-pedal',
   liveDemoUrl: 'https://yourwebsite.com/demo'
 };
 
@@ -110,44 +112,7 @@ export default function ProjectDetailPage() {
 
       {/* Main content with smooth scrolling sections */}
       <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-20">
-        {/* Media gallery */}
-        <section className="space-y-8">
-          <h2 className="text-2xl font-bold mb-6">Project Gallery</h2>
-          <div className="space-y-12">
-          {project.media.map((item, index) => (
-            <div key={index} className="scroll-mt-20" id={`media-${index}`}>
-              {item.type === 'image' ? (
-                <div className={`rounded-xl overflow-hidden shadow-xl bg-[var(--muted)] ${index === 0 ? 'max-w-md mx-auto' : ''}`}>
-                  <Image
-                    src={item.url}
-                    alt={item.caption || `${project.title} image ${index + 1}`}
-                    width={1200}
-                    height={800}
-                    className="w-full h-auto object-cover"
-                  />
-                    {item.caption && (
-                      <p className="text-sm text-[color:rgba(var(--foreground),0.6)] mt-2 px-4 py-2">
-                        {item.caption}
-                      </p>
-                    )}
-                  </div>
-                ) : (
-                  <div className="aspect-w-16 aspect-h-9 bg-black rounded-xl overflow-hidden shadow-xl">
-                    <iframe 
-                      src={item.url} 
-                      className="w-full h-full"
-                      frameBorder="0" 
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                      allowFullScreen
-                      title={item.caption || `${project.title} video`}
-                    ></iframe>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </section>
-
+        
         {/* Project details */}
         <section className="scroll-mt-20" id="details">
           <h2 className="text-2xl font-bold mb-6">Project Details</h2>
@@ -179,37 +144,62 @@ export default function ProjectDetailPage() {
           </div>
         </section>
 
-        {/* Technical implementation */}
-        <section className="scroll-mt-20" id="technical">
-          <h2 className="text-2xl font-bold mb-6">Technical Implementation</h2>
-          <div className="bg-[var(--muted)] rounded-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">Architecture Diagram</h3>
-            <div className="aspect-w-16 aspect-h-9 bg-[var(--background)] rounded-lg overflow-hidden flex items-center justify-center">
-              <Image
-                src="/projects/architecture-diagram.jpg"
-                alt="System architecture diagram"
-                width={800}
-                height={450}
-                className="object-contain p-4"
-              />
+        {/* Media gallery */}
+        <section className="space-y-8">
+          <h2 className="text-2xl font-bold mb-6">Project Gallery</h2>
+          <div className="space-y-12">
+            {/* First two images side by side */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 scroll-mt-20">
+              {project.media.slice(0, 2).map((item, index) => (
+                <div key={index} className="rounded-xl overflow-hidden shadow-xl bg-[var(--muted)]">
+                  <Image
+                    src={item.url}
+                    alt={item.caption || `${project.title} image ${index + 1}`}
+                    width={800}
+                    height={600}
+                    className="w-full h-auto object-cover"
+                  />
+                  {item.caption && (
+                    <p className="text-sm text-[color:rgba(var(--foreground),0.6)] mt-2 px-4 py-2">
+                      {item.caption}
+                    </p>
+                  )}
+                </div>
+              ))}
             </div>
-            <div className="mt-6 space-y-4">
-              <h4 className="font-medium">Challenges & Solutions</h4>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <span className="text-[var(--primary)] mr-2">•</span>
-                  <span><strong>Latency issues:</strong> Optimized DSP algorithms and used DMA for audio transfer</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-[var(--primary)] mr-2">•</span>
-                  <span><strong>Noise reduction:</strong> Implemented proper PCB grounding and shielding techniques</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-[var(--primary)] mr-2">•</span>
-                  <span><strong>Real-time control:</strong> Developed a custom RTOS task scheduler for effect switching</span>
-                </li>
-              </ul>
-            </div>
+
+            {/* Full width images/videos */}
+            {project.media.slice(2).map((item, index) => (
+              <div key={index + 2} className="scroll-mt-20">
+                {item.type === 'image' ? (
+                  <div className="rounded-xl overflow-hidden shadow-xl bg-[var(--muted)]">
+                    <Image
+                      src={item.url}
+                      alt={item.caption || `${project.title} image ${index + 3}`}
+                      width={1200}
+                      height={800}
+                      className="w-full h-auto object-cover"
+                    />
+                    {item.caption && (
+                      <p className="text-sm text-[color:rgba(var(--foreground),0.6)] mt-2 px-4 py-2">
+                        {item.caption}
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  <div className="aspect-w-16 aspect-h-9 bg-black rounded-xl overflow-hidden shadow-xl">
+                    <iframe 
+                      src={item.url} 
+                      className="w-full h-full"
+                      frameBorder="0" 
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                      allowFullScreen
+                      title={item.caption || `${project.title} video`}
+                    ></iframe>
+                  </div>
+                )}
+              </div>
+            ))}
           </div>
         </section>
       </main>

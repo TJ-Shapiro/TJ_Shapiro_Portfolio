@@ -32,18 +32,25 @@ export default function AboutPage() {
             
             <div className="prose prose-invert max-w-none text-[color:rgba(var(--foreground),0.8)] mb-8">
               <p className="text-lg mb-4">
-              I&apos;m TJ Shapiro, a passionate developer specializing in embedded systems and interactive experiences. 
-                With a background in both hardware and software, I bridge the gap between digital and physical worlds.
+              I&apos;m TJ Shapiro, a recent Computer Engineering graduate from UIUC specializing in embedded systems and creating interactive experiences. 
+                With a background in both hardware and software, I strive to bridge the gap between digital and physical worlds.
               </p>
               <p className="text-lg mb-4">
-                My journey in technology began when I first discovered the magic of making computers do things beyond 
-                their out-of-the-box capabilities. Since then, I&apos;ve been obsessed with creating systems that are not 
-                just functional but delightful to interact with.
+              My journey in tech began in San Diego, where I interned at the UCSD Supercomputing Center. There, I worked with a research team exploring the frontiers of 
+              immersive VR—a formative experience that sparked my passion for designing systems that are not only functional, but genuinely fun to interact with.
+              </p>
+              <p className="text-lg mb-4">
+              Since then, I’ve been dedicated to developing interactive devices and creative applications that blend engineering precision with playful innovation. 
+              Whether it’s crafting custom audio effects pedals or prototyping gesture-based interfaces, I love pushing the boundaries of what embedded systems can do.
+              </p>
+              <p className="text-lg mb-4">
+                When I&apos;m not creating interactive devices and experiences, you can find me playing guitar, DJing, tutoring students in STEM, or going to the beach!
               </p>
               <p className="text-lg">
-                When I&apos;m not coding, you can find me playing guitar, experimenting with audio electronics, 
-                or exploring the latest in AR/VR technologies.
+              I&apos;m currently seeking opportunities to work on innovative projects that challenge conventions and elevate how people engage with technology. 
+              If your team is looking for an Embedded Systems Engineer or a similar role, I&apos;d love to connect! 
               </p>
+              
             </div>
             
             {/* Skills & Interests */}
@@ -66,11 +73,27 @@ export default function AboutPage() {
                     </li>
                     <li className="flex items-center">
                       <span className="w-2 h-2 rounded-full bg-[var(--primary)] mr-2"></span>
+                      <span>FPGA</span>
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 rounded-full bg-[var(--primary)] mr-2"></span>
                       <span>Digital Signal Processing</span>
                     </li>
                     <li className="flex items-center">
                       <span className="w-2 h-2 rounded-full bg-[var(--primary)] mr-2"></span>
                       <span>RTOS & Bare Metal Programming</span>
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 rounded-full bg-[var(--primary)] mr-2"></span>
+                      <span>IoT</span>
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 rounded-full bg-[var(--primary)] mr-2"></span>
+                      <span>AI/ML</span>
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 rounded-full bg-[var(--primary)] mr-2"></span>
+                      <span>VR/AR</span>
                     </li>
                     <li className="flex items-center">
                       <span className="w-2 h-2 rounded-full bg-[var(--primary)] mr-2"></span>
@@ -92,6 +115,10 @@ export default function AboutPage() {
                     </li>
                     <li className="flex items-center">
                       <span className="w-2 h-2 rounded-full bg-[var(--primary)] mr-2"></span>
+                      <span>Spatial Computing</span>
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 rounded-full bg-[var(--primary)] mr-2"></span>
                       <span>Augmented Reality Applications</span>
                     </li>
                     <li className="flex items-center">
@@ -101,6 +128,14 @@ export default function AboutPage() {
                     <li className="flex items-center">
                       <span className="w-2 h-2 rounded-full bg-[var(--primary)] mr-2"></span>
                       <span>Open Source Hardware</span>
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 rounded-full bg-[var(--primary)] mr-2"></span>
+                      <span>Real-Time Graphics</span>
+                    </li>
+                    <li className="flex items-center">
+                      <span className="w-2 h-2 rounded-full bg-[var(--primary)] mr-2"></span>
+                      <span>Sound Design</span>
                     </li>
                   </ul>
                 </div>
