@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, ArrowTopRightOnSquareIcon, CodeBracketIcon } from '@heroicons/react/24/solid';
+import { ArrowLeftIcon, ArrowTopRightOnSquareIcon, CodeBracketIcon, SparklesIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
 import Link from 'next/link';
 import PDFViewer from '@/app/components/PDFViewer';
@@ -14,9 +14,10 @@ const project = {
   ],
   tags: ['SwiftUI', 'ARKit', 'Computer Vision', 'CoreML', 'HealthKit'],
   media: [
-    { type: 'image', url: '/projects/vision1.jpg', caption: 'Surgeon using Vision Pro in OR', layout: 'full' },
-    { type: 'image', url: '/projects/vision2.jpg', caption: 'Sensor housing and components', layout: 'half' },
-    { type: 'image', url: '/projects/vision3.jpg', caption: 'System block diagram', layout: 'half' }
+    { type: 'image', url: '/projects/vision1.jpg', caption: 'System Design Overview', layout: 'full' },
+    { type: 'image', url: '/projects/vision2.jpg', caption: 'Surgeon using Vision Pro in OR', layout: 'half' },
+    { type: 'image', url: '/projects/vision3.jpg', caption: 'Sensor Housing and Components', layout: 'half' },
+    { type: 'image', url: '/projects/vision4.jpg', caption: 'Hardware Design Block Diagram', layout: 'full' }
   ],
   features: [
     'Real-time tumor detection with <1ms latency',
@@ -31,43 +32,61 @@ const project = {
 
 export default function VisionProProjectPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-      <div className="sticky top-0 z-10 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800">
+    <div className="relative min-h-screen overflow-hidden bg-gray-900 text-gray-100">
+      {/* Animated background elements */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[url('/projects/grid-pattern.svg')] opacity-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/90"></div>
+        <div className="hidden lg:block absolute -top-20 -left-20 w-64 h-64 rounded-full bg-violet-600 opacity-5 animate-float"></div>
+        <div className="hidden lg:block absolute bottom-10 -right-20 w-48 h-48 rounded-full bg-blue-500 opacity-10 animate-float-delay"></div>
+      </div>
+
+      {/* Header */}
+      <div className="sticky top-0 z-10 bg-gray-900/80 backdrop-blur-md border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <Link href="/projects" className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline group">
+          <Link href="/projects" className="inline-flex items-center text-blue-400 hover:text-white group transition-colors">
             <ArrowLeftIcon className="h-5 w-5 mr-2 transition-transform group-hover:-translate-x-1" />
             Back to Projects
           </Link>
         </div>
       </div>
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">{project.title}</h1>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl">
+      {/* Hero section */}
+      <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="mb-12 animate-fade-in">
+          <div className="flex items-center mb-4">
+            <SparklesIcon className="h-8 w-8 text-violet-500 mr-3 animate-pulse" />
+            <span className="text-sm font-medium bg-violet-900/30 text-violet-400 px-3 py-1 rounded-full">
+              Featured Project
+            </span>
+          </div>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="text-primary-gradient animate-gradient">{project.title}</span>
+          </h1>
+          <p className="text-xl text-gray-400 max-w-3xl leading-relaxed">
             {project.description}
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-4 mb-12">
-          <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap items-center gap-6 mb-16">
+          <div className="flex flex-wrap gap-3">
             {project.tags.map((tag) => (
               <span 
                 key={tag}
-                className="px-3 py-1 bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 text-sm rounded-full"
+                className="px-4 py-1.5 bg-gray-800 text-gray-300 text-sm rounded-full hover:bg-violet-600 hover:text-white transition-colors"
               >
                 {tag}
               </span>
             ))}
           </div>
           
-          <div className="flex gap-4 ml-auto">
+          <div className="flex gap-6 ml-auto">
             {project.githubUrl && (
               <a 
                 href={project.githubUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center text-blue-600 dark:text-blue-400 hover:underline group"
+                className="flex items-center text-blue-400 hover:text-white group transition-colors"
               >
                 <CodeBracketIcon className="h-5 w-5 mr-2 transition-transform group-hover:scale-110" />
                 Source Code
@@ -78,7 +97,7 @@ export default function VisionProProjectPage() {
                 href={project.liveDemoUrl} 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center text-blue-600 dark:text-blue-400 hover:underline group"
+                className="flex items-center text-blue-400 hover:text-white group transition-colors"
               >
                 <ArrowTopRightOnSquareIcon className="h-5 w-5 mr-2 transition-transform group-hover:scale-110" />
                 Live Demo
@@ -89,15 +108,17 @@ export default function VisionProProjectPage() {
       </section>
 
       {/* Main content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-20">
+      <main className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20 space-y-20">
 
         {/* Project details */}
-        <section className="scroll-mt-20" id="details">
-          <h2 className="text-2xl font-bold mb-6">Project Details</h2>
+        <section className="scroll-mt-20 animate-fade-in" id="details" style={{ animationDelay: "0.2s" }}>
+          <h2 className="text-3xl font-bold mb-8 text-white">
+            Project <span className="text-primary-gradient">Details</span>
+          </h2>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-6">
               {project.detailedDescription.map((paragraph, index) => (
-                <p key={index} className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                <p key={index} className="text-gray-300 leading-relaxed">
                   {paragraph}
                 </p>
               ))}
@@ -105,15 +126,17 @@ export default function VisionProProjectPage() {
             
             {/* Features list */}
             <div className="lg:col-span-1">
-              <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-6 shadow-sm sticky top-24">
-                <h3 className="text-lg font-semibold mb-4">Key Features</h3>
+              <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-6 border border-gray-700 shadow-lg sticky top-24 hover:border-violet-500 transition-all duration-300">
+                <h3 className="text-xl font-semibold mb-4 text-white">
+                  <span className="text-primary-gradient">Key</span> Features
+                </h3>
                 <ul className="space-y-3">
                   {project.features.map((feature, index) => (
-                    <li key={index} className="flex items-start">
+                    <li key={index} className="flex items-start group">
                       <div className="flex-shrink-0 mt-1.5">
-                        <div className="h-2 w-2 bg-blue-500 rounded-full"></div>
+                        <div className="h-2 w-2 bg-violet-500 rounded-full group-hover:bg-blue-400 transition-colors"></div>
                       </div>
-                      <span className="ml-3 text-gray-700 dark:text-gray-300">{feature}</span>
+                      <span className="ml-3 text-gray-300 group-hover:text-white transition-colors">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -123,106 +146,129 @@ export default function VisionProProjectPage() {
         </section>
 
         {/* Media gallery */}
-        <section className="space-y-8">
-          <h2 className="text-2xl font-bold mb-6">Project Gallery</h2>
+        <section className="space-y-8 animate-fade-in" style={{ animationDelay: "0.4s" }}>
+          <h2 className="text-3xl font-bold mb-8 text-white">
+            Project <span className="text-primary-gradient">Gallery</span>
+          </h2>
           <div className="space-y-12">
-            <div className="scroll-mt-20">
-              <div className="rounded-xl overflow-hidden shadow-xl bg-gray-100 dark:bg-gray-800">
-                <Image
-                  src={project.media[0].url}
-                  alt={project.media[0].caption}
-                  width={1600}
-                  height={900}
-                  className="w-full h-auto object-cover"
-                  priority
-                />
-                {project.media[0].caption && (
-                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 px-4 py-2">
-                    {project.media[0].caption}
-                  </p>
-                )}
+            <div className="group relative rounded-2xl overflow-hidden shadow-2xl bg-gray-800 border border-gray-700 hover:border-violet-500 transition-all duration-500">
+              <Image
+                src={project.media[0].url}
+                alt={project.media[0].caption}
+                width={1600}
+                height={900}
+                className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <p className="text-white text-lg font-medium">
+                  {project.media[0].caption}
+                </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 scroll-mt-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {project.media.slice(1, 3).map((item, index) => (
-                <div key={index} className="rounded-xl overflow-hidden shadow-xl bg-gray-100 dark:bg-gray-800">
+                <div 
+                  key={index} 
+                  className="group relative rounded-xl overflow-hidden shadow-xl bg-gray-800 border border-gray-700 hover:border-blue-400 transition-all duration-500"
+                >
                   <Image
                     src={item.url}
                     alt={item.caption}
                     width={800}
                     height={600}
-                    className="w-full h-auto object-cover"
+                    className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
                   />
-                  {item.caption && (
-                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-2 px-4 py-2">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <p className="text-white text-sm font-medium">
                       {item.caption}
                     </p>
-                  )}
+                  </div>
                 </div>
               ))}
             </div>
-            {project.media[3] && (
-              <div className="scroll-mt-20">
-                <div className="aspect-w-16 aspect-h-9 bg-black rounded-xl overflow-hidden shadow-xl">
-                  <iframe 
-                    src={project.media[3].url} 
-                    className="w-full h-full"
-                    frameBorder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowFullScreen
-                    title={project.media[3].caption}
-                  />
-                </div>
+
+            <div className="group relative rounded-2xl overflow-hidden shadow-2xl bg-gray-800 border border-gray-700 hover:border-violet-500 transition-all duration-500">
+              <Image
+                src={project.media[3].url}
+                alt={project.media[3].caption}
+                width={1600}
+                height={900}
+                className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                <p className="text-white text-lg font-medium">
+                  {project.media[0].caption}
+                </p>
               </div>
-            )}
+            </div>
+          
           </div>
         </section>
 
-        
-
         {/* Technical implementation */}
-        <section className="scroll-mt-20" id="technical">
-          <h2 className="text-2xl font-bold mb-6">Technical Implementation</h2>
-          <div className="bg-gray-100 dark:bg-gray-800 rounded-xl p-6">
-            <h3 className="text-lg font-semibold mb-4">Design Process and Research Documentation</h3>
+        <section className="animate-fade-in" id="technical" style={{ animationDelay: "0.6s" }}>
+          <h2 className="text-3xl font-bold mb-8 text-white">
+            Technical <span className="text-primary-gradient">Implementation</span>
+          </h2>
+          <div className="bg-gray-800/50 backdrop-blur-sm rounded-xl p-8 border border-gray-700 hover:border-blue-400 transition-all duration-300 shadow-lg">
+            <h3 className="text-xl font-semibold mb-6 text-white">
+              Design Process and Research Documentation
+            </h3>
             
             <PDFViewer 
               filePath="visionpro.pdf"
               height="800px"
               width="100%"
-              className="my-8" 
+              className="my-8 rounded-lg overflow-hidden shadow-lg border border-gray-700" 
             />
             
-            <div className="mt-6 space-y-4">
-              <h4 className="font-medium">Technical Challenges & Solutions</h4>
-              <ul className="space-y-3">
-                <li className="flex items-start">
-                  <span className="text-blue-500 mr-2">•</span>
-                  <span><strong>Real-time processing:</strong> Developed custom Metal shaders for GPU acceleration of image processing pipelines</span>
+            <div className="mt-8 space-y-6">
+              <h4 className="text-lg font-medium text-white mb-4">
+                Technical Challenges & Solutions
+              </h4>
+              <ul className="space-y-4">
+                <li className="flex items-start group">
+                  <span className="text-violet-500 mr-3 mt-1">•</span>
+                  <div>
+                    <strong className="text-white group-hover:text-blue-400 transition-colors">Real-time processing:</strong>
+                    <span className="text-gray-300"> Developed custom Metal shaders for GPU acceleration of image processing pipelines</span>
+                  </div>
                 </li>
-                <li className="flex items-start">
-                  <span className="text-blue-500 mr-2">•</span>
-                  <span><strong>Sensor fusion:</strong> Created novel algorithms to combine RGB and NIR data with sub-millisecond synchronization</span>
+                <li className="flex items-start group">
+                  <span className="text-violet-500 mr-3 mt-1">•</span>
+                  <div>
+                    <strong className="text-white group-hover:text-blue-400 transition-colors">Sensor fusion:</strong>
+                    <span className="text-gray-300"> Created novel algorithms to combine RGB and NIR data with sub-millisecond synchronization</span>
+                  </div>
                 </li>
-                <li className="flex items-start">
-                  <span className="text-blue-500 mr-2">•</span>
-                  <span><strong>Privacy compliance:</strong> Implemented on-device processing with zero PHI data leaving the Vision Pro</span>
+                <li className="flex items-start group">
+                  <span className="text-violet-500 mr-3 mt-1">•</span>
+                  <div>
+                    <strong className="text-white group-hover:text-blue-400 transition-colors">Privacy compliance:</strong>
+                    <span className="text-gray-300"> Implemented on-device processing with zero PHI data leaving the Vision Pro</span>
+                  </div>
                 </li>
               </ul>
             </div>
           </div>
         </section>
       </main>
-      <section className="bg-gray-100 dark:bg-gray-800 py-16">
+
+      {/* CTA section */}
+      <section className="relative z-10 bg-gray-800/50 backdrop-blur-sm border-t border-gray-700 py-16 animate-fade-in" style={{ animationDelay: "0.8s" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">Want to know more?</h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
+          <h2 className="text-2xl font-bold mb-4 text-white">
+            Want to know more?
+          </h2>
+          <p className="text-gray-400 mb-8 max-w-2xl mx-auto text-lg">
             Interested in the technical details or exploring how these skills could translate to your team?
           </p>
           <Link 
             href="/contact" 
-            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center px-8 py-4 bg-primary-gradient text-white rounded-xl font-medium hover:opacity-90 transition-all hover:scale-[1.02] shadow-lg hover:shadow-violet-500/30"
           >
             Contact Me!
           </Link>
